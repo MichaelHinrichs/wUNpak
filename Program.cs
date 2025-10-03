@@ -49,7 +49,7 @@ namespace wUNpak
                 MemoryStream outstream = new();
                 
                 Directory.CreateDirectory(newFolder);
-                BinaryWriter bw = new BinaryWriter(File.OpenWrite(newFolder + "\\" + sub.name));
+                BinaryWriter bw = new(File.OpenWrite(newFolder + "\\" + sub.name));
                 bw.Write(br.ReadBytes(sub.size));
                 bw.Close();
             }

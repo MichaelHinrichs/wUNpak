@@ -13,7 +13,9 @@ namespace wUNpak
         static void Main(string[] args)
         {
             br = new BinaryReader(File.OpenRead(args[0]));
-            br.ReadInt64();
+            if (new string(br.ReadChars(4)) != "wpk\0")
+                throw new System.Exception("Not a Warp Engine wpak file.");
+            br.ReadUInt32();
             uint subfileDataOffset = (uint)(br.ReadUInt32() + br.BaseStream.Position);
             uint numSubfiles = br.ReadUInt32();
             List<SubFileMetaData> subFileMetaData = new();
@@ -61,3 +63,4 @@ namespace wUNpak
         }
     }
 }
+
